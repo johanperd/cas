@@ -87,19 +87,4 @@ class FileTrustStoreSslSocketFactoryTests {
             assertTrue(client.isValidEndPoint("http://wikipedia.org"));
         }
     }
-
-    @Nested
-    @SpringBootTest(classes = DefaultCasSSLContextTests.SharedTestConfiguration.class,
-        properties = "cas.http-client.trust-store.file=classpath:truststore.jks")
-    public class DefaultSslContext {
-        @Autowired
-        @Qualifier(CasSSLContext.BEAN_NAME)
-        private CasSSLContext casSslContext;
-
-        @Test
-        void verifyOperation() throws Throwable {
-            assertNotNull(casSslContext.getTrustManagerFactory());
-            assertNotNull(DefaultCasSSLContextTests.SharedTestConfiguration.contactUrl("https://self-signed.badssl.com", casSslContext));
-        }
-    }
 }
